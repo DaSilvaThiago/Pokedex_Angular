@@ -64,4 +64,12 @@ export class AppComponent {
   closeModal() {
     this.selectedPokemon = undefined;
   }
+
+  filterValue: string = "";
+  filteredPokemons(): Pokemon[] {
+    if (!this.filterValue) {
+      return this.pokemons;
+    }
+    return this.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.filterValue.toLowerCase()));
+  }
 }

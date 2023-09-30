@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <div class="header">
   <div class="inner-header flex">
@@ -19,9 +21,16 @@
     </svg>
   </div>
 </div>
-
+<div class="procura">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="filterValue" name="search" placeholder="Search..." class="search-input">
+    <a href="#" class="search-btn">
+      <i class="fas fa-search"></i>
+    </a>
+  </div>
+</div>
 <div class="content flex">
-  <div class="card" *ngFor="let pokemon of pokemons" (click)="showDetails(pokemon)">
+  <div class="card" *ngFor="let pokemon of filteredPokemons()" (click)="showDetails(pokemon)">
     <div class="card__content">
       <p class="paragrafo">{{pokemon.name}}</p>
       <img src="{{pokemon.visualRepresentation}}" alt="">
@@ -32,20 +41,54 @@
 <div *ngIf="selectedPokemon" id="container">
   <div class="container-inner">
     <div class="content2">
-      <h1>{{selectedPokemon.name}}</h1>
-      <p *ngFor="let type of selectedPokemon.types"><i class="fas fa-bolt" title="Tipo"></i> {{ type }}</p>
-      <p><i class="fas fa-heart" title="Pontos de Vida"></i> {{ selectedPokemon.totalHealth }}</p>
-      <p><i class="fas fa-fist-raised" title="Ataque"></i> {{ selectedPokemon.physicalAttack }}</p>
-      <p><i class="fas fa-shield-alt" title="Defesa"></i> {{ selectedPokemon.physicalDefense }}</p>
-      <p><i class="fas fa-tachometer-alt" title="Velocidade"></i> {{ selectedPokemon.speed }}</p>
-      <p><i class="fas fa-hand-sparkles" title="Habilidades"></i> {{ selectedPokemon.abilities.join(', ') }}</p>
-      <p><i class="fas fa-arrow-circle-up" title="Evolução"></i> {{ selectedPokemon.evolution }}</p>
-      <p><i class="fas fa-book" title="Movimentos"></i> {{ selectedPokemon.moves.join(', ') }}</p>
-      <p><i class="fas fa-arrows-alt-v" title="Altura"></i> {{ selectedPokemon.dimensions }}</p>
-      <p><i class="fas fa-weight-hanging" title="Peso"></i> {{ selectedPokemon.dimensions }}</p>
+      <div class="mainModal">
+        <div class="photoModal">
+          <img src="{{selectedPokemon.visualRepresentation}}" alt="">
+          <h2>#{{selectedPokemon.id}} {{selectedPokemon.name}}</h2>
+        </div>
+        <div class="descriptionModal">
+          <h3>Description</h3>
+          <p>{{ selectedPokemon.description }}</p>
+          <h3>Caracteristiques</h3>
+          <div class="datasModal">
+            <div class="datas">
+              <p>Female</p>
+              <p>50%</p>
+            </div>
+            <div class="datas">
+              <p>Male</p>
+              <p>50%</p>
+            </div>
+            <div class="datas">
+              <p>Weight</p>
+              <p>6.0kg</p>
+            </div>
+            <div class="datas">
+              <p>Height</p>
+              <p>0,4m</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="buttons">
       <button (click)="closeModal()" id='close'>close</button>
     </div>
   </div>
 </div>
+
+
+
+
+<!--
+<h1></h1>
+<p *ngFor="let type of selectedPokemon.types"><i class="fas fa-bolt" title="Tipo"></i> {{ type }}</p>
+<p><i class="fas fa-heart" title="Pontos de Vida"></i> {{ selectedPokemon.totalHealth }}</p>
+<p><i class="fas fa-fist-raised" title="Ataque"></i> {{ selectedPokemon.physicalAttack }}</p>
+<p><i class="fas fa-shield-alt" title="Defesa"></i> {{ selectedPokemon.physicalDefense }}</p>
+<p><i class="fas fa-tachometer-alt" title="Velocidade"></i> {{ selectedPokemon.speed }}</p>
+<p><i class="fas fa-hand-sparkles" title="Habilidades"></i> {{ selectedPokemon.abilities.join(', ') }}</p>
+<p><i class="fas fa-arrow-circle-up" title="Evolução"></i> {{ selectedPokemon.evolution }}</p>
+<p><i class="fas fa-book" title="Movimentos"></i> {{ selectedPokemon.moves.join(', ') }}</p>
+<p><i class="fas fa-arrows-alt-v" title="Altura"></i> {{ selectedPokemon.dimensions }}</p>
+<p><i class="fas fa-weight-hanging" title="Peso"></i> {{ selectedPokemon.dimensions }}</p>-->
